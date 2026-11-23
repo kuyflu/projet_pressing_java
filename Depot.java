@@ -2,7 +2,7 @@
  * Lavielle Thibaud
  * Brogné Aël
  * Groupe FB
- * 16/11/2026
+ * 18/11/2026
  * encapsulation, héritage, polymorphisme, constantes
  */
 package tppressing;
@@ -24,6 +24,6 @@ public class Depot {
         this.dateD = dateD;
     }
     public String toString(){
-        return "Depot " + num + " : " + client + ", " + prest + ", prix : " + prix + "euros, depose le " + dateD
+        return "Depot " + num + " : " + client + ", " + prest + ", prix : " + prix + "euros, depose le " + dateD + ", recupere le " + dateR;
     }
 }

@@ -21,4 +21,12 @@ public class Client {
     public String toString(){
         return "Nom : " + nom + ", Telephone : " + tel + ", Mail : " + email;
     }
+    
+    public boolean placerAprès(Client autre){
+        int t = this.nom.compareTo(autre.nom);
+        if (t!=0){
+            return t>0;
+        }
+        return this.tel.compareTo(autre.tel)>0;
+    }
 }

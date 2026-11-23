@@ -7,7 +7,7 @@
  */
 package tppressing;
 
-import java.util.Scanner;
+import java.time.LocalDateTime;
 
 public class TPPressing {
 
@@ -24,6 +24,15 @@ public class TPPressing {
         System.out.println(ps1);
         Prestation pi1 = new PrestationIntensive('A', 1);
         System.out.println(pi1);
+        Depot d1 = new Depot(1, c1, pe1, 17.0, LocalDateTime.now());
+        System.out.println(d1);
+        double[][] tabTarifs = {{1,5,3},
+                {4.3,4.25,3.5},
+                {3.4,5.2,3.5},
+                {5,5,8}
+                };
+        Etablissement e1 = new Etablissement("tt", tabTarifs);
+        e1.afficher();
     }
     
 }
