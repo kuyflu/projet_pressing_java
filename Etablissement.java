@@ -2,10 +2,12 @@
  * Lavielle Thibaud
  * Brogné Aël
  * Groupe FB
- * 18/11/2026
+ * 24/11/2026
  * encapsulation, héritage, polymorphisme, constantes
  */
 package tppressing;
+
+import java.time.LocalDateTime;
 
 public class Etablissement {
     private String nom;
@@ -18,6 +20,8 @@ public class Etablissement {
     public Etablissement(String nom, double[][] tabTarifs){
         this.nom = nom;
         this.tabTarifs = tabTarifs;
+        this.tabClients = new Client[MAX_CLIENTS];
+        this.tabDepots = new Depot[MAX_DEPOTS];
     }
     
     public void afficher(){
@@ -32,5 +36,64 @@ public class Etablissement {
             }
             System.out.println();
         }    
+    }
+    
+    public Client ajouter(String nom, String tel, String email){
+        if(nbreClients >= MAX_CLIENTS){
+            return null;
+        }
+        Client c = new Client(nom, tel, email);
+        int i = nbreClients;
+        while(i>0 && tabClients[i-1].placerApres(c)){
+            tabClients[i] = tabClients[i-1];
+            i--;
+        }
+        tabClients[i] = c;
+        nbreClients++;
+        return c;
+    }
+    
+    public Client ajouter(String nom, String tel){
+        return ajouter(nom, tel, null);
+    }
+    
+    public Client rechercher(String nom, String tel) {
+        Client modele = new Client(nom, tel);
+        for (int i = 0; i < nbreClients; i++) {
+            if (!tabClients[i].placerApres(modele) && !modele.placerApres(tabClients[i])) {
+                return tabClients[i];
+            }
+        }
+        return null;
+    }
+    public double ajouter(Client client, char categorie, boolean repassage){
+        if(nbreDepots >= MAX_DEPOTS){
+            return -1;
+        }
+        Prestation p = new PrestationExpress(categorie, repassage);
+        double prix = p.nettoyage(tabTarifs);
+        tabDepots[nbreDepots] = new Depot(nbreDepots + 1, client, p, prix, LocalDateTime.now());
+        nbreDepots++;
+        return prix;
+    }
+    public double ajouter(Client client, char categorie){
+        if(nbreDepots >= MAX_DEPOTS){
+            return -1;
+        }
+        Prestation p = new PrestationStandard(categorie);
+        double prix = p.nettoyage(tabTarifs);
+        tabDepots[nbreDepots] = new Depot(nbreDepots + 1, client, p, prix, LocalDateTime.now());
+        nbreDepots++;
+        return prix;
+    }
+    public double ajouter(Client client, char categorie, int typeTache){
+        if(nbreDepots >= MAX_DEPOTS){
+            return -1;
+        }
+        Prestation p = new PrestationIntensive(categorie, typeTache);
+        double prix = p.nettoyage(tabTarifs);
+        tabDepots[nbreDepots] = new Depot(nbreDepots + 1, client, p, prix, LocalDateTime.now());
+        nbreDepots++;
+        return prix;
     }
 }

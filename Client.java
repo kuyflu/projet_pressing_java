@@ -2,7 +2,7 @@
  * Lavielle Thibaud
  * Brogné Aël
  * Groupe FB
- * 16/11/2026
+ * 23/11/2026
  * encapsulation, héritage, polymorphisme, constantes
  */
 package tppressing;
@@ -22,7 +22,7 @@ public class Client {
         return "Nom : " + nom + ", Telephone : " + tel + ", Mail : " + email;
     }
     
-    public boolean placerAprès(Client autre){
+    public boolean placerApres(Client autre){
         int t = this.nom.compareTo(autre.nom);
         if (t!=0){
             return t>0;
